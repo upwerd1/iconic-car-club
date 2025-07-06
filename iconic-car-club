@@ -1,0 +1,171 @@
+// iconic-car-club: React + Supabase App (Starter)
+
+// Directory structure:
+// - src/
+//   - App.jsx
+//   - components/
+//     - Header.jsx
+//     - Gallery.jsx
+//     - Events.jsx
+//     - Profile.jsx
+//     - Login.jsx
+// - index.html
+// - tailwind.config.js
+// - postcss.config.js
+// - package.json
+// - .env.example
+
+// ==== src/App.jsx ====
+import { useState } from 'react';
+import Header from './components/Header';
+import Gallery from './components/Gallery';
+import Events from './components/Events';
+import Profile from './components/Profile';
+import Login from './components/Login';
+
+function App() {
+  const [view, setView] = useState('gallery');
+
+  return (
+    <div className="bg-black text-white min-h-screen">
+      <Header setView={setView} />
+      {view === 'gallery' && <Gallery />}
+      {view === 'events' && <Events />}
+      {view === 'profile' && <Profile />}
+      {view === 'login' && <Login />}
+    </div>
+  );
+}
+
+export default App;
+
+// ==== src/components/Header.jsx ====
+function Header({ setView }) {
+  return (
+    <header className="bg-red-700 p-4 text-center text-2xl font-bold">
+      Iconic Car Club
+      <nav className="mt-2 space-x-4 text-base">
+        <button onClick={() => setView('gallery')}>Gallery</button>
+        <button onClick={() => setView('events')}>Events</button>
+        <button onClick={() => setView('profile')}>Profile</button>
+        <button onClick={() => setView('login')}>Login</button>
+      </nav>
+    </header>
+  );
+}
+export default Header;
+
+// ==== src/components/Gallery.jsx ====
+function Gallery() {
+  return (
+    <section className="p-4">
+      <h2 className="text-xl font-semibold mb-4">Club Gallery</h2>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="bg-white text-black p-2">[Image]</div>
+        <div className="bg-white text-black p-2">[Image]</div>
+      </div>
+    </section>
+  );
+}
+export default Gallery;
+
+// ==== src/components/Events.jsx ====
+function Events() {
+  return (
+    <section className="p-4">
+      <h2 className="text-xl font-semibold mb-4">Upcoming Events</h2>
+      <ul>
+        <li>Cars & Coffee – July 14, Lansing, MI</li>
+        <li>Corvette Cruise – August 3, Detroit</li>
+      </ul>
+    </section>
+  );
+}
+export default Events;
+
+// ==== src/components/Profile.jsx ====
+function Profile() {
+  return (
+    <section className="p-4">
+      <h2 className="text-xl font-semibold mb-4">Member Profile</h2>
+      <form className="space-y-4">
+        <input type="text" placeholder="Name" className="w-full p-2 text-black" />
+        <input type="text" placeholder="Car (e.g., 2021 Corvette C8)" className="w-full p-2 text-black" />
+        <textarea placeholder="Bio" className="w-full p-2 text-black" />
+        <button type="submit" className="bg-red-700 p-2">Save</button>
+      </form>
+    </section>
+  );
+}
+export default Profile;
+
+// ==== src/components/Login.jsx ====
+function Login() {
+  return (
+    <section className="p-4">
+      <h2 className="text-xl font-semibold mb-4">Login</h2>
+      <form className="space-y-4">
+        <input type="email" placeholder="Email" className="w-full p-2 text-black" />
+        <input type="password" placeholder="Password" className="w-full p-2 text-black" />
+        <button type="submit" className="bg-red-700 p-2">Login</button>
+      </form>
+    </section>
+  );
+}
+export default Login;
+
+// ==== index.html ====
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Iconic Car Club</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/App.jsx"></script>
+  </body>
+</html>
+
+// ==== tailwind.config.js ====
+module.exports = {
+  content: ['./index.html', './src/**/*.{js,jsx}'],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+};
+
+// ==== postcss.config.js ====
+module.exports = {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+};
+
+// ==== package.json ====
+{
+  "name": "iconic-car-club",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.12",
+    "postcss": "^8.4.18",
+    "tailwindcss": "^3.1.8",
+    "vite": "^4.0.0"
+  }
+}
+
+// ==== .env.example ====
+VITE_SUPABASE_URL=https://your-project.supabase.co
+VITE_SUPABASE_KEY=your-public-anon-key
